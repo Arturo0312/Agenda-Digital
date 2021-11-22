@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="257.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.AMRB.Login">
+   <children>
+      <Button fx:id="btnlog" layoutX="89.0" layoutY="172.0" mnemonicParsing="false" onAction="#Login" text="Iniciar Sesión" />
+      <Button fx:id="btnex" layoutX="201.0" layoutY="172.0" mnemonicParsing="false" onAction="#Exit" text="Salir" />
+      <Label layoutX="140.0" layoutY="25.0" text="Iniciar Sesión" textAlignment="CENTER" />
+      <Label layoutX="33.0" layoutY="77.0" text="Usuario:" />
+      <Label layoutX="33.0" layoutY="107.0" text="Contraseña:" />
+      <TextField fx:id="txtus" layoutX="101.0" layoutY="73.0" />
+      <PasswordField fx:id="txtpass" layoutX="101.0" layoutY="103.0" />
+   </children>
+</AnchorPane>
