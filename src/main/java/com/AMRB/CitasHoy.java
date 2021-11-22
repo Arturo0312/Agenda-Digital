@@ -10,12 +10,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
 public class CitasHoy {
 
-
+    private @FXML Button btnCons;
     private ObservableList<Cita> Citas;
     @FXML private TableView<Cita> tblCitas;
     @FXML private TableColumn ColPac;
@@ -34,7 +35,7 @@ public class CitasHoy {
         Connection connection = DriverManager.getConnection(url);
         st=connection.createStatement();
         try {
-            rs = st.executeQuery("SELECT * from Citas WHERE Día='"+Hoy+"';");
+            rs = st.executeQuery("SELECT * from Citas WHERE Día='"+Hoy+"' order by Hora;");
             while (rs.next()) {
                 String nom = rs.getString("Nombre");
                 String pad = rs.getString("Padecimiento");
@@ -47,13 +48,20 @@ public class CitasHoy {
         catch (SQLException  e) {
 
         }
-
     }
     public void CitasTabla(){
         Citas = FXCollections.observableArrayList();
         this.ColPac.setCellValueFactory(new PropertyValueFactory("Paciente"));
         this.ColPad.setCellValueFactory(new PropertyValueFactory("Padecimiento"));
         this.ColHor.setCellValueFactory(new PropertyValueFactory("Hora"));
-        System.out.println(Citas);
+    }
+    public void Consultar() throws IOException {
+        FXMLLoader Com = new FXMLLoader(getClass().getResource("AsignarAgenda.fxml"));
+        Parent root = Com.load();
+        AsignarAgenda ad= Com.getController();
+        Scene scene2 = new Scene(root);
+        Stage stage2 = new Stage();
+        stage2.setScene(scene2);
+        stage2.show();
     }
 }
