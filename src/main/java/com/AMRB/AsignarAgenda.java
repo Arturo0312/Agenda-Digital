@@ -28,6 +28,7 @@ public class AsignarAgenda {
     public void initialize() throws SQLException {
         String path = AsignarAgenda.class.getResource("Pacientes.db").toString();
         String url = "jdbc:sqlite:" + path;
+        System.out.println(path);
         ResultSet rs;
         Statement st;
         ObservableList<String> Pacientes= FXCollections.observableArrayList();

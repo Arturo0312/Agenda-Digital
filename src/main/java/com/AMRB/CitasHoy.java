@@ -30,6 +30,7 @@ public class CitasHoy {
         LocalDate Hoy = LocalDate.now();
         System.out.println(Hoy);
         String path = CitasHoy.class.getResource("Citas.db").toString();
+        System.out.println(path);
         String url = "jdbc:sqlite:" + path;
         Statement st;
         Connection connection = DriverManager.getConnection(url);
@@ -63,5 +64,14 @@ public class CitasHoy {
         Stage stage2 = new Stage();
         stage2.setScene(scene2);
         stage2.show();
+    }
+    public void Registrar() throws IOException {
+        FXMLLoader Com = new FXMLLoader(getClass().getResource("RegistrarPaciente.fxml"));
+        Parent root = Com.load();
+        RegistrarPaciente ad= Com.getController();
+        Scene scene3 = new Scene(root);
+        Stage stage3 = new Stage();
+        stage3.setScene(scene3);
+        stage3.show();
     }
 }
