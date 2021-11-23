@@ -60,23 +60,38 @@ public class AsignarAgenda {
         String Pad=txtpad.getText();
         String hora=cmbhor.getValue();
         LocalDate dia=dtCalendario.getValue();
+        LocalDate hoy=LocalDate.now();
         String d=dia.toString();
-        String path = AsignarAgenda.class.getResource("Citas.db").toString();
-        String url = "jdbc:sqlite:" + path;
-        String sql= "Insert into Citas values('" + P + "','" + Pad + "','" + hora + "','" + Doc + "','" + d + "');";
-        Statement st;
-        Connection connection = DriverManager.getConnection(url);
-        st=connection.createStatement();
-        try {
-            st.execute(sql);
+        if (!dia.isBefore(hoy)) {
+            String path = AsignarAgenda.class.getResource("Citas.db").toString();
+            String url = "jdbc:sqlite:" + path;
+            String sql = "Insert into Citas values('" + P + "','" + Pad + "','" + hora + "','" + Doc + "','" + d + "');";
+            Statement st;
+            Connection connection = DriverManager.getConnection(url);
+            st = connection.createStatement();
+            try {
+                st.execute(sql);
+            } catch (SQLException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                if(e.toString().contains("PRIMARY KEY"))
+                {
+                    alert.setContentText("Esta fecha ya esta ocupada.");
+                }
+                else{
+                    alert.setContentText("No ingreso correctamente los datos");
+                }
+                alert.showAndWait();
+                System.out.println(e);
+            }
         }
-        catch (SQLException e){
+        else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
-            alert.setContentText("No ingreso correctamente los datos");
+            alert.setContentText("La fecha ya paso");
             alert.showAndWait();
-            System.out.println(e);
         }
     }
 }
