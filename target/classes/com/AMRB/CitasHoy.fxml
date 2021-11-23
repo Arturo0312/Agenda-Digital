@@ -7,7 +7,7 @@
    <children>
       <Button fx:id="btnCons" layoutX="310.0" layoutY="76.0" mnemonicParsing="false" onAction="#Consultar" text="Consultar Agenda" textAlignment="CENTER" />
       <Label layoutX="334.0" layoutY="15.0" text="Menú" />
-      <Label layoutX="95.0" layoutY="15.0" text="Citas de Hoy" />
+      <Label fx:id="lbldia" layoutX="95.0" layoutY="15.0" />
       <Button layoutX="301.0" layoutY="121.0" mnemonicParsing="false" text="Consultar Expediente" textAlignment="CENTER" />
       <Button layoutX="309.0" layoutY="160.0" mnemonicParsing="false" onAction="#Registrar" text="Registrar Paciente" textAlignment="CENTER" />
       <TableView fx:id="tblCitas" accessibleText="unu" layoutX="7.0" layoutY="39.0" prefHeight="299.0" prefWidth="268.0">
@@ -20,5 +20,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Button fx:id="btnnext" layoutX="217.0" layoutY="11.0" mnemonicParsing="false" onAction="#Next" text="-&gt;" />
+      <Button fx:id="btnprev" layoutX="40.0" layoutY="11.0" mnemonicParsing="false" onAction="#Prev" text="&lt;-" />
    </children>
 </AnchorPane>

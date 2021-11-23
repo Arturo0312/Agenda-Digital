@@ -7,12 +7,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
 
 public class RegistrarPaciente {
     private @FXML
@@ -39,7 +38,7 @@ public class RegistrarPaciente {
         String tipo=txttip.getText();
         String sex=cmbsex.getValue();
         String Alergia=txfal.getText();
-        String path = RegistrarPaciente.class.getResource("Pacientes.db").toString();
+        String path = Objects.requireNonNull(RegistrarPaciente.class.getResource("Pacientes.db")).toString();
         String url = "jdbc:sqlite:" + path;
         String sql= "Insert into Paciente values('" + Nombre + "','" + Apellido + "','" + Correo + "','" + tipo + "','" + Alergia + "','" + num + "','" + sex +"');";
         Statement st;
@@ -60,7 +59,6 @@ public class RegistrarPaciente {
             alert.setTitle("Error");
             alert.setContentText("No ingreso correctamente los datos");
             alert.showAndWait();
-            System.out.println(e);
         }
     }
 }

@@ -13,24 +13,29 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class CitasHoy {
 
     private @FXML Button btnCons;
     private ObservableList<Cita> Citas;
-    @FXML private TableView<Cita> tblCitas;
-    @FXML private TableColumn ColPac;
+    private @FXML TableView<Cita> tblCitas;
+    private @FXML TableColumn ColPac;
     @FXML private TableColumn ColPad;
     @FXML private TableColumn ColHor;
+    private @FXML Label lbldia;
+    private LocalDate Hoy=LocalDate.now();
+    private @FXML Button btnnext;
+    private @FXML Button btnprev;
 
+    public CitasHoy() {
+    }
 
     public void initialize() throws SQLException {
         CitasTabla();
         ResultSet rs;
-        LocalDate Hoy = LocalDate.now();
-        System.out.println(Hoy);
-        String path = CitasHoy.class.getResource("Citas.db").toString();
-        System.out.println(path);
+        lbldia.setText(String.valueOf(this.Hoy));
+        String path = Objects.requireNonNull(CitasHoy.class.getResource("Citas.db")).toString();
         String url = "jdbc:sqlite:" + path;
         Statement st;
         Connection connection = DriverManager.getConnection(url);
@@ -41,15 +46,23 @@ public class CitasHoy {
                 String nom = rs.getString("Nombre");
                 String pad = rs.getString("Padecimiento");
                 String ho = rs.getString("Hora");
-                Cita a= new Cita(nom,pad,ho);
+                Cita a = new Cita(nom, pad, ho);
                 this.Citas.add(a);
                 this.tblCitas.setItems(Citas);
             }
         }
         catch (SQLException  e) {
-
+            System.out.println("No hay citas");
         }
     }
+
+    public void LimpiarT(){
+        CitasTabla();
+        Cita a = new Cita("","","");
+        this.Citas.add(a);
+        this.tblCitas.setItems(Citas);
+    }
+
     public void CitasTabla(){
         Citas = FXCollections.observableArrayList();
         this.ColPac.setCellValueFactory(new PropertyValueFactory("Paciente"));
@@ -73,5 +86,17 @@ public class CitasHoy {
         Stage stage3 = new Stage();
         stage3.setScene(scene3);
         stage3.show();
+    }
+
+    public void Next() throws SQLException {
+        this.Hoy=Hoy.plusDays(1);
+        LimpiarT();
+        initialize();
+    }
+
+    public void Prev() throws SQLException {
+        this.Hoy=Hoy.minusDays(1);
+        LimpiarT();
+        initialize();
     }
 }

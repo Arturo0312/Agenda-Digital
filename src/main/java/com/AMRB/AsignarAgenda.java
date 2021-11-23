@@ -41,7 +41,7 @@ public class AsignarAgenda {
             {
                 n=rs.getString("Nombre");
                 a=rs.getString("Apellido");
-                Pacientes.addAll(n+" - "+a);
+                Pacientes.addAll(n+" "+a);
             }
             System.out.println(Pacientes);
             cmbPac.setItems(Pacientes);
@@ -83,7 +83,6 @@ public class AsignarAgenda {
                     alert.setContentText("No ingreso correctamente los datos");
                 }
                 alert.showAndWait();
-                System.out.println(e);
             }
         }
         else {
