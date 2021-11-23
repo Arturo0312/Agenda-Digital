@@ -18,6 +18,7 @@ import java.util.Objects;
 public class CitasHoy {
 
     private @FXML Button btnCons;
+    private @FXML Button btnexp;
     private ObservableList<Cita> Citas;
     private @FXML TableView<Cita> tblCitas;
     private @FXML TableColumn ColPac;
@@ -32,6 +33,7 @@ public class CitasHoy {
     }
 
     public void initialize() throws SQLException {
+        LimpiarT();
         CitasTabla();
         ResultSet rs;
         lbldia.setText(String.valueOf(this.Hoy));
@@ -39,9 +41,9 @@ public class CitasHoy {
         String url = "jdbc:sqlite:" + path;
         Statement st;
         Connection connection = DriverManager.getConnection(url);
-        st=connection.createStatement();
-        try {
-            rs = st.executeQuery("SELECT * from Citas WHERE Día='"+Hoy+"' order by Hora;");
+        try (connection) {
+            st = connection.createStatement();
+            rs = st.executeQuery("SELECT * from Citas WHERE Día='" + Hoy + "' order by Hora;");
             while (rs.next()) {
                 String nom = rs.getString("Nombre");
                 String pad = rs.getString("Padecimiento");
@@ -50,8 +52,7 @@ public class CitasHoy {
                 this.Citas.add(a);
                 this.tblCitas.setItems(Citas);
             }
-        }
-        catch (SQLException  e) {
+        } catch (SQLException e) {
             System.out.println("No hay citas");
         }
     }
@@ -88,6 +89,15 @@ public class CitasHoy {
         stage3.show();
     }
 
+    public void Expediente() throws IOException {
+        FXMLLoader Com = new FXMLLoader(getClass().getResource("Calendario.fxml"));
+        Parent root = Com.load();
+        Calendario ad= Com.getController();
+        Scene scene4 = new Scene(root);
+        Stage stage4 = new Stage();
+        stage4.setScene(scene4);
+        stage4.show();
+    }
     public void Next() throws SQLException {
         this.Hoy=Hoy.plusDays(1);
         LimpiarT();

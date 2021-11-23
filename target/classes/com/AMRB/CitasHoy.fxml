@@ -8,7 +8,7 @@
       <Button fx:id="btnCons" layoutX="310.0" layoutY="76.0" mnemonicParsing="false" onAction="#Consultar" text="Consultar Agenda" textAlignment="CENTER" />
       <Label layoutX="334.0" layoutY="15.0" text="Menú" />
       <Label fx:id="lbldia" layoutX="95.0" layoutY="15.0" />
-      <Button layoutX="301.0" layoutY="121.0" mnemonicParsing="false" text="Consultar Expediente" textAlignment="CENTER" />
+      <Button fx:id="btnexp" layoutX="301.0" layoutY="121.0" mnemonicParsing="false" onAction="#Expediente" text="Consultar Expediente" textAlignment="CENTER" />
       <Button layoutX="309.0" layoutY="160.0" mnemonicParsing="false" onAction="#Registrar" text="Registrar Paciente" textAlignment="CENTER" />
       <TableView fx:id="tblCitas" accessibleText="unu" layoutX="7.0" layoutY="39.0" prefHeight="299.0" prefWidth="268.0">
         <columns>
