@@ -62,74 +62,101 @@ public class Calendario {
         switch (f){
             case SUNDAY:
                 btnd5.setText(String.valueOf(d));
-                btnl5.setText("");
-                btnm5.setText("");
-                btnmi5.setText("");
-                btnj5.setText("");
-                btnv5.setText("");
-                btns5.setText("");
+                btnd5.setVisible(true);
+                btnl5.setVisible(false);
+                btnm5.setVisible(false);
+                btnmi5.setVisible(false);
+                btnj5.setVisible(false);
+                btnv5.setVisible(false);
+                btns5.setVisible(false);
                 btns4.setText(String.valueOf(d-1));
                 this.a=(btnd5.getText());
                 break;
             case MONDAY:
                 btnl5.setText(String.valueOf(d));
+                btnl5.setVisible(true);
                 btnd5.setText(String.valueOf(d-1));
-                btnm5.setText("");
-                btnmi5.setText("");
-                btnj5.setText("");
-                btnv5.setText("");
-                btns5.setText("");
+                btnd5.setVisible(true);
+                btnm5.setVisible(false);
+                btnmi5.setVisible(false);
+                btnj5.setVisible(false);
+                btnv5.setVisible(false);
+                btns5.setVisible(false);
                 this.a=(btnl5.getText());
                 break;
             case TUESDAY:
                 btnm5.setText(String.valueOf(d));
+                btnm5.setVisible(true);
                 btnl5.setText(String.valueOf(d-1));
+                btnl5.setVisible(true);
                 btnd5.setText(String.valueOf(Integer.parseInt(btnl5.getText())-1));
-                btnmi5.setText("");
-                btnj5.setText("");
-                btnv5.setText("");
-                btns5.setText("");
+                btnd5.setVisible(true);
+                btnmi5.setVisible(false);
+                btnj5.setVisible(false);
+                btnv5.setVisible(false);
+                btns5.setVisible(false);
                 this.a=(btnm5.getText());
                 break;
             case WEDNESDAY:
                 btnmi5.setText(String.valueOf(d));
+                btnmi5.setVisible(true);
                 btnm5.setText(String.valueOf(d-1));
+                btnm5.setVisible(true);
                 btnl5.setText(String.valueOf(Integer.parseInt(btnm5.getText())-1));
+                btnl5.setVisible(true);
                 btnd5.setText(String.valueOf(Integer.parseInt(btnl5.getText())-1));
-                btnj5.setText("");
-                btnv5.setText("");
-                btns5.setText("");
+                btnd5.setVisible(true);
+                btnj5.setVisible(false);
+                btnv5.setVisible(false);
+                btns5.setVisible(false);
                 this.a=(btnmi5.getText());
                 break;
             case THURSDAY:
                 btnj5.setText(String.valueOf(d));
+                btnj5.setVisible(true);
                 btnmi5.setText(String.valueOf(Integer.parseInt(btnj5.getText())-1));
+                btnmi5.setVisible(true);
                 btnm5.setText(String.valueOf(Integer.parseInt(btnmi5.getText())-1));
-                System.out.println(btnmi5.getText());
+                btnm5.setVisible(true);
                 btnl5.setText(String.valueOf(Integer.parseInt(btnm5.getText())-1));
+                btnl5.setVisible(true);
                 btnd5.setText(String.valueOf(Integer.parseInt(btnl5.getText())-1));
-                btnv5.setText("");
-                btns5.setText("");
+                btnd5.setVisible(true);
+                btnv5.setVisible(false);
+                btns5.setVisible(false);
                 this.a=(btnj5.getText());
                 break;
             case FRIDAY:
                 btnv5.setText(String.valueOf(d));
+                btnv5.setVisible(true);
                 btnj5.setText(String.valueOf(d-1));
+                btnj5.setVisible(true);
                 btnmi5.setText(String.valueOf(Integer.parseInt(btnj5.getText())-1));
+                btnmi5.setVisible(true);
                 btnm5.setText(String.valueOf(Integer.parseInt(btnmi5.getText())-1));
+                btnm5.setVisible(true);
                 btnl5.setText(String.valueOf(Integer.parseInt(btnm5.getText())-1));
+                btnl5.setVisible(true);
                 btnd5.setText(String.valueOf(Integer.parseInt(btnl5.getText())-1));
-                btns5.setText("");
+                btnd5.setVisible(true);
+                btns5.setVisible(false);
                 this.a=(btnv5.getText());
                 break;
             case SATURDAY:
                 btns5.setText(String.valueOf(d));
+                btns5.setVisible(true);
                 btnv5.setText(String.valueOf(d-1));
+                btnv5.setVisible(true);
                 btnj5.setText(String.valueOf(d-2));
+                btnj5.setVisible(true);
                 btnmi5.setText(String.valueOf(d-3));
+                btnmi5.setVisible(true);
                 btnm5.setText(String.valueOf(d-4));
+                btnm5.setVisible(true);
                 btnl5.setText(String.valueOf(d-5));
+                btnl5.setVisible(true);
                 btnd5.setText(String.valueOf(Integer.parseInt(btnl5.getText())-1));
+                btnd5.setVisible(true);
                 this.a=(btns5.getText());
                 break;
         }
@@ -138,8 +165,6 @@ public class Calendario {
 
     public void Actualizar(int intento){
        int dia= Integer.parseInt(a);
-        if (dia>0)
-        {
             try {
                 btns4.setText(String.valueOf(Integer.parseInt(btnd5.getText()) - 1));
                 btnv4.setText(String.valueOf(Integer.parseInt(btns4.getText()) - 1));
@@ -163,24 +188,59 @@ public class Calendario {
                 btnl2.setText(String.valueOf(Integer.parseInt(btnm2.getText()) - 1));
                 btnd2.setText(String.valueOf(Integer.parseInt(btnl2.getText()) - 1));
                 btns1.setText(String.valueOf(Integer.parseInt(btnd2.getText()) - 1));
-                btnv1.setText(String.valueOf(Integer.parseInt(btns1.getText()) - 1));
-                btnj1.setText(String.valueOf(Integer.parseInt(btnv1.getText()) - 1));
-                btnmi1.setText(String.valueOf(Integer.parseInt(btnj1.getText()) - 1));
-                btnm1.setText(String.valueOf(Integer.parseInt(btnmi1.getText()) - 1));
-                btnl1.setText(String.valueOf(Integer.parseInt(btnm1.getText()) - 1));
-                btnd1.setText(String.valueOf(Integer.parseInt(btnl1.getText()) - 1));
+                if(!(btns1.getText()).equals("")&&!btns1.getText().equals("1")){
+                    btnv1.setVisible(true);
+                    btnv1.setText(String.valueOf(Integer.parseInt(btns1.getText()) - 1));
+                }
+                else{
+                    btnv1.setText("");
+                    btnv1.setVisible(false);}
+                if(!(btnv1.getText()).equals("")&&!btnv1.getText().equals("1")){
+                    btnj1.setVisible(true);
+                    btnj1.setText(String.valueOf(Integer.parseInt(btnv1.getText()) - 1));
+                }
+                else{
+                    btnj1.setText("");
+                    btnj1.setVisible(false);}
+                if(!(btnj1.getText()).equals("")&&!btnj1.getText().equals("1")){
+                    btnmi1.setVisible(true);
+                    btnmi1.setText(String.valueOf(Integer.parseInt(btnj1.getText()) - 1));
+                }
+                else{
+                    btnmi1.setText("");
+                    btnmi1.setVisible(false);}
+                if(!(btnmi1.getText()).equals("")&&!btnmi1.getText().equals("1")){
+                    btnm1.setVisible(true);
+                    btnm1.setText(String.valueOf(Integer.parseInt(btnmi1.getText()) - 1));
+                }
+                else{
+                    btnm1.setText("");
+                    btnm1.setVisible(false);}
+                if(!(btnm1.getText()).equals("")&&!btnm1.getText().equals("1")){
+                    btnl1.setVisible(true);
+                    btnl1.setText(String.valueOf(Integer.parseInt(btnm1.getText()) - 1));
+                }
+                else{
+                    btnl1.setText("");
+                    btnl1.setVisible(false);}
+                if(!(btnl1.getText()).equals("")&&!btnl1.getText().equals("1")){
+                    btnd1.setVisible(true);
+                    btnd1.setText(String.valueOf(Integer.parseInt(btnl1.getText()) - 1));
+                }
+                else{
+                    btnd1.setText("");
+                    btnd1.setVisible(false);}
             }
             catch (Exception e)
             {
-                System.out.println("a");
+                System.out.println(e);
             }
-        }
-
     }
+
 
     public void mesant(){
         this.mes=mes.minus(1);
-        if(mes.equals(Month.JANUARY))
+        if(mes.equals(Month.DECEMBER))
         {
             this.año=año-1;
         }
@@ -189,7 +249,7 @@ public class Calendario {
 
     public void messig(){
         this.mes=mes.plus(1);
-        if(mes.equals(Month.DECEMBER))
+        if(mes.equals(Month.JANUARY))
         {
             this.año=año+1;
         }
