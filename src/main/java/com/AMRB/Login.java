@@ -34,14 +34,16 @@ public class Login {
             rs = st.executeQuery("SELECT * from Users WHERE Usuario='"+usuario+"'and Contra='"+pass+"';");
             String usV=rs.getString("Usuario");
             String pasV=rs.getString("Contra");
-            if(usV!=usuario && pasV!=pass){
+            if(usV.equals(usuario) && pasV.equals(pass)){
                 FXMLLoader Com = new FXMLLoader(getClass().getResource("CitasHoy.fxml"));
                 Parent root = Com.load();
                 CitasHoy ad= Com.getController();
                 Scene scene2 = new Scene(root);
                 Stage stage2 = new Stage();
                 stage2.setScene(scene2);
-                Exit();
+                stage2.setTitle("Citas de Hoy");
+                stage2.setUserData(usuario);
+                ad.initialize(stage2);
                 stage2.show();
             }
         }

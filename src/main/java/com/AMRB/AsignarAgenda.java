@@ -24,6 +24,7 @@ public class AsignarAgenda {
     TextField txtpad;
     private @FXML
     DatePicker dtCalendario;
+    private @FXML ComboBox<String> cmbdoc;
 
     public void initialize() throws SQLException {
         String path = AsignarAgenda.class.getResource("Pacientes.db").toString();
@@ -52,11 +53,29 @@ public class AsignarAgenda {
         ObservableList<String> h= FXCollections.observableArrayList();
         h.addAll("11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00");
         cmbhor.setItems(h);
+        path=AsignarAgenda.class.getResource("Usuarios.db").toString();
+        url = "jdbc:sqlite:" + path;
+        ObservableList<String> Doctores= FXCollections.observableArrayList();
+        String Doc;
+        connection = DriverManager.getConnection(url);
+        st=connection.createStatement();
+        try {
+            rs = st.executeQuery("SELECT * from Users;");
+            while (rs.next())
+            {
+                Doc=rs.getString("Usuario");
+                Doctores.addAll(Doc);
+            }
+            cmbdoc.setItems(Doctores);
+        }
+        catch (SQLException  e) {
+            System.out.println("a");
+        }
         }
 
     public void Agendar() throws SQLException {
         String P=cmbPac.getValue();
-        String Doc=txtdoc.getText();
+        String Doc=cmbdoc.getValue();
         String Pad=txtpad.getText();
         String hora=cmbhor.getValue();
         LocalDate dia=dtCalendario.getValue();
